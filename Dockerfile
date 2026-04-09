@@ -10,20 +10,11 @@ RUN chmod +x ./gradlew
 COPY src ./src
 
 RUN set -eux; \
+    app_name="$(sed -n 's/^projectArtifactId=//p' gradle.properties)"; \
+    test -n "$app_name"; \
     ./gradlew --no-daemon installDist; \
-    install_dir="$(find build/install -mindepth 1 -maxdepth 1 -type d | head -n 1)"; \
-    test -n "$install_dir"; \
-    mv "$install_dir" /opt/app; \
-    printf '%s\n' \
-      '#!/bin/sh' \
-      'set -eu' \
-      '' \
-      'launcher="$(find "$(dirname "$0")/bin" -mindepth 1 -maxdepth 1 -type f ! -name '\''*.bat'\'' | head -n 1)"' \
-      'test -n "$launcher"' \
-      '' \
-      'exec "$launcher" "$@"' \
-      > /opt/app/run; \
-    chmod +x /opt/app/run
+    mv "build/install/$app_name" /opt/app; \
+    ln -s "/app/bin/$app_name" /opt/app/bin/start
 
 FROM eclipse-temurin:25-jre
 
@@ -37,4 +28,4 @@ ENV JAVA_OPTS=""
 
 USER appuser
 
-ENTRYPOINT ["./run"]
+ENTRYPOINT ["/app/bin/start"]
