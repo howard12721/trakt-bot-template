@@ -1,0 +1,9 @@
+[versions]
+kotlin = "2.3.20"
+trakt-bot = "1.2.1"
+
+[libraries]
+trakt-bot = { module = "com.github.howard12721.traKt:trakt-bot", version.ref = "trakt-bot" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
