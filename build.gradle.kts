@@ -16,6 +16,7 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation(libs.trakt.bot)
+    implementation(libs.kotlinx.coroutines.core)
 }
 
 kotlin {
