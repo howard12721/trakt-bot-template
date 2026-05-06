@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.3.21"
-trakt-bot = "4.0.0"
+trakt-bot = "4.1.0"
 kotlinx-coroutines = "1.10.2"
 
 [libraries]
