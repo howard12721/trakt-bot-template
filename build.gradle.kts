@@ -10,7 +10,6 @@ val projectMainClass = providers.gradleProperty("projectMainClass").get()
 
 repositories {
     mavenCentral()
-    maven(url = "https://jitpack.io")
 }
 
 dependencies {
